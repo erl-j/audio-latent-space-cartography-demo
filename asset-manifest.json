@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/audio-latent-space-cartography-demo/static/css/main.3d6f78f1.css",
-    "main.js": "/audio-latent-space-cartography-demo/static/js/main.c91fca5a.js",
+    "main.js": "/audio-latent-space-cartography-demo/static/js/main.0b7efa83.js",
     "static/js/787.de0885df.chunk.js": "/audio-latent-space-cartography-demo/static/js/787.de0885df.chunk.js",
     "static/media/logo.svg": "/audio-latent-space-cartography-demo/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/audio-latent-space-cartography-demo/index.html",
     "main.3d6f78f1.css.map": "/audio-latent-space-cartography-demo/static/css/main.3d6f78f1.css.map",
-    "main.c91fca5a.js.map": "/audio-latent-space-cartography-demo/static/js/main.c91fca5a.js.map",
+    "main.0b7efa83.js.map": "/audio-latent-space-cartography-demo/static/js/main.0b7efa83.js.map",
     "787.de0885df.chunk.js.map": "/audio-latent-space-cartography-demo/static/js/787.de0885df.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d6f78f1.css",
-    "static/js/main.c91fca5a.js"
+    "static/js/main.0b7efa83.js"
   ]
 }
