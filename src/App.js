@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import pointData from './pointData.js';
-
+import React from 'react';
 const FRAME_WIDTH = 512;
 const INNER_WIDTH = 3200;
 
@@ -16,35 +16,72 @@ const family2emoji = {
   "brass": "🎺",
   "keyboard": "🎹",
   "organ": "⛪️",
-  "voice": "🗣",
+  "vocal": "🗣",
   "mallet": "🔨",
   "string": "🎻",
   "flute": "🪄",
 }
 
 
-const SHOW_LABEL = false;
 function App() {
+
+  const [showLabels, setShowLabels] = React.useState(false);
+
+  console.log(showLabels)
+
   return (
     <div className="App">
       <h1>Audio Latent Space Cartography Demo</h1>
-      <div style={{ position: "relative", display: "inline-block" }}>
-        <img src="./map.png" style={{ height: "80vh" }}></img>
-        {pointData.map((point, pi) => {
-          return <div key={pi}
-            onClick={() => {
-              // play audio
-              console.log("play audio", point)
-              const audio = new Audio(point.metadata.filepath.replace("./data/nsynth/nsynth-test/audio/", "/"));
-              // lower volume
-              audio.volume = 0.1;
-              audio.play();
-              console.log("hello")
-            }}
-            style={{ width: 10, height: 10, borderRadius: 100, backgroundColor: "turquoise", cursor: "pointer", position: "absolute", left: c2p(point.y) * 100 + "%", top: 100 - c2p(point.x) * 100 + "%", color: "grey", fontSize: 15 }}>{SHOW_LABEL ? family2emoji[point.metadata.instrument_family_str] : ""}</div>
-        })}
-      </div>
-    </div >
+      <div
+        onClick={
+          () => {
+            setShowLabels(!showLabels)
+          }
+        }
+      >Show labels</div>
+      <div style={{ flexDirection: "row", display: "flex", justifyContent: "center" }}>
+        <div style={{ position: "relative", display: "inline-block", height: "99vh" }}>
+          <img src="./map.png" style={{ height: "100%", opacity: showLabels ? 0.1 : 1 }}></img>
+          {pointData.map((point, pi) => {
+            return <div key={pi}
+              onClick={() => {
+                // play audio
+                console.log("play audio", point)
+                const audio = new Audio(point.metadata.filepath.replace("./data/nsynth/nsynth-test", process.env.PUBLIC_URL));
+                // lower volume
+                audio.volume = 0.1;
+                audio.play();
+                console.log("hello")
+              }}
+              style={{
+                width: 0,
+                height: 0,
+                borderRadius: 100,
+                backgroundColor: "turquoise",
+                cursor: "pointer", position: "absolute",
+                left: c2p(point.y) * 100 + "%",
+                top: 100 - c2p(point.x) * 100 + "%",
+                color: "grey", fontSize: 25,
+                lineHeight: "-50%"
+              }}>{showLabels ? family2emoji[point.metadata.instrument_family_str] : ""}</div>
+          })}
+
+        </div>
+        {showLabels &&
+          <div>
+
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%" }}>
+              <h3>Legend</h3 >
+              {Object.keys(family2emoji).map((family) => {
+                return <div style={{ display: "flex", flexDirection: "row", }}>
+                  <div>{family2emoji[family]}   {family}</div>
+                </div>
+              })}
+            </div>
+
+          </div>}
+      </div >
+    </div>
   );
 }
 
