@@ -27,18 +27,20 @@ function App() {
 
   const [showLabels, setShowLabels] = React.useState(false);
 
-  console.log(showLabels)
+
 
   return (
     <div className="App">
       <h1>Audio Latent Space Cartography Demo</h1>
-      <div
+      <p>Click on a point to hear it</p>
+      <button
+
         onClick={
           () => {
             setShowLabels(!showLabels)
           }
         }
-      >Show labels</div>
+      >{!showLabels ? "Show audio labels" : "Hide audio labels"}</button>
       <div style={{ flexDirection: "row", display: "flex", justifyContent: "center" }}>
         <div style={{ position: "relative", display: "inline-block", height: "99vh" }}>
           <img src="./map.png" style={{ height: "100%", opacity: showLabels ? 0.1 : 1 }}></img>
@@ -54,10 +56,11 @@ function App() {
                 console.log("hello")
               }}
               style={{
-                width: 0,
-                height: 0,
+                width: showLabels ? 0 : 20,
+                height: showLabels ? 0 : 20,
                 borderRadius: 100,
-                backgroundColor: "turquoise",
+                backgroundColor: "lightgray",
+                boxShadow: "10px 10px 10px black",
                 cursor: "pointer", position: "absolute",
                 left: c2p(point.y) * 100 + "%",
                 top: 100 - c2p(point.x) * 100 + "%",
@@ -73,7 +76,7 @@ function App() {
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%" }}>
               <h3>Legend</h3 >
               {Object.keys(family2emoji).map((family) => {
-                return <div style={{ display: "flex", flexDirection: "row", }}>
+                return <div style={{ display: "flex", flexDirection: "row", fontSize: 30 }}>
                   <div>{family2emoji[family]}   {family}</div>
                 </div>
               })}
