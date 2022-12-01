@@ -35,7 +35,7 @@ function App() {
             onClick={() => {
               // play audio
               console.log("play audio", point)
-              const audio = new Audio(point.metadata.filepath.replace("./", "http://0.0.0.0:8000/"));
+              const audio = new Audio(point.metadata.filepath.replace("./data/nsynth/nsynth-test/audio/", "/"));
               // lower volume
               audio.volume = 0.1;
               audio.play();
