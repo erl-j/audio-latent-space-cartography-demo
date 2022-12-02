@@ -37,11 +37,9 @@ function App() {
     <div style={{ width: "100vw", height: "100vh", flex: "column", flexDirection: "column" }}>
       <div style={{ margin: 32 }}>
         <h1>Audio Latent Space Cartography Demo</h1>
-        <p>Click on a point to hear it</p>
-        <p>Select a style in the dropdown</p>
-        <p>Legend appears at the bottom of the page when labels are shown.</p>
+        <p>Click on a point to hear it. Select a latent map style in the dropdown. Legend appears at the bottom of the page when labels are shown.</p>
         <label>
-          Latent map style
+          Latent map style :
           <select type="select" value={selectedMap} onChange={(e) => setSelectedMap(e.target.value)}>
             {
               Object.keys(mapName2url).map((name) => {
@@ -58,7 +56,7 @@ function App() {
             }
           }
         >{!showLabels ? "Show audio labels" : "Hide audio labels"}</button>
-        <br></br>
+
 
 
       </div>
@@ -78,11 +76,11 @@ function App() {
                 console.log("hello")
               }}
               style={{
-                width: showLabels ? 0 : "2vh",
-                height: showLabels ? 0 : "2vh",
+                width: showLabels ? 0 : "1.5vh",
+                height: showLabels ? 0 : "1.5vh",
                 borderRadius: 100,
                 backgroundColor: "lightgray",
-                boxShadow: "10px 10px 10px black",
+                boxShadow: "0px 0px 3px 1px black",
                 cursor: "pointer", position: "absolute",
                 left: c2p(point.y) * 100 + "%",
                 top: 100 - c2p(point.x) * 100 + "%",
