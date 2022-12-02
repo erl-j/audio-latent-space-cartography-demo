@@ -26,6 +26,7 @@ const mapName2url = {
   "Magritte": "./magritte_map.png",
   "3D render": "./map.png",
   "Mushroom mode": "./mushroom_map.png",
+  "Christmas ornaments": "./christmas_map.png",
 }
 
 
