@@ -22,20 +22,35 @@ const family2emoji = {
   "flute": "🪄",
 }
 
+const mapName2url = {
+  "Magritte": "./magritte_map.png",
+  "3D render": "./map.png",
+}
+
 
 function App() {
 
   const [showLabels, setShowLabels] = React.useState(false);
-
-
+  const [selectedMap, setSelectedMap] = React.useState("3D render");
 
   return (
     <div style={{ width: "100vw", height: "100vh", flex: "column", flexDirection: "column" }}>
       <div style={{ margin: 32 }}>
         <h1>Audio Latent Space Cartography Demo</h1>
         <p>Click on a point to hear it</p>
-        <p>Legend appears at the bottom of the page when labels are shown.
-        </p>
+        <p>Select a style in the dropdown</p>
+        <p>Legend appears at the bottom of the page when labels are shown.</p>
+        <label>
+          Latent map style
+          <select type="select" value={selectedMap} onChange={(e) => setSelectedMap(e.target.value)}>
+            {
+              Object.keys(mapName2url).map((name) => {
+                return <option value={name}>{name}</option>
+              })
+            }
+          </select>
+        </label>
+        <br></br>
         <button
           onClick={
             () => {
@@ -45,11 +60,12 @@ function App() {
         >{!showLabels ? "Show audio labels" : "Hide audio labels"}</button>
         <br></br>
 
+
       </div>
       <div style={{ flexDirection: "row", display: "flex", justifyContent: "center" }}>
 
         <div style={{ position: "relative", display: "inline-block" }}>
-          <img src="./map.png" style={{ maxHeight: "100vh", maxWidth: "98vw", opacity: showLabels ? 0.1 : 1 }}></img>
+          <img src={mapName2url[selectedMap]} style={{ maxHeight: "100vh", maxWidth: "98vw", opacity: showLabels ? 0.1 : 1 }}></img>
           {pointData.map((point, pi) => {
             return <div key={pi}
               onClick={() => {
