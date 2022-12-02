@@ -22,18 +22,63 @@ const family2emoji = {
   "flute": "🪄",
 }
 
+const keywords = {
+  "instruments": [
+    "bass guitar",
+    "acoustic guitar",
+    "piano keyboard",
+    "flute",
+    "pipe organ",
+    "violin",
+    "cello",
+    "double bass",
+    "violin",
+    "viola",
+    "saxophone",
+    "trumpet",
+    "trombone",
+    "tuba",
+    "clarinet",
+    "marimba",
+    "kalimba",
+    "xylophone",
+    "bell",
+    "electric guitar",
+    "human voice",
+  ],
+  "adjectives":
+    [
+      "soft",
+      "hard",
+      "rough",
+      "smooth",
+      "textured",
+      "metallic",
+      "repeating",
+      "distorted",
+      "geometric",
+      "bright",
+      "dark",
+      "scary",
+      "weird",
+      "organic",
+    ]
+}
+
+
 const mapName2url = {
-  "3D rendered Music Instruments": "maps/map.png",
-  "Magritte Music Instruments": "maps/magritte_map.png",
-  "Mushroom mode": "maps/mushroom_map.png",
-  "Christmas ornaments": "maps/christmas_map.png",
-  "Neon lights":"maps/neon_map.png",
-  "Flowers":"maps/flowers_map.png"
+  "Music instruments": { keywords: keywords["instruments"], prompt_template: "A 3D rendered close-up of a <KEYWORD>, pinterest trending aesthetic", url: "maps/map.jpg" },
+  "René Magritte": { keywords: keywords["instruments"], prompt_template: "A close-up of a <KEYWORD> in the style of Renee Magritte, pinterest trending aesthetic", url: "maps/magritte_map.jpg" },
+  "Besinski": { keywords: keywords["instruments"], prompt_template: "A close-up of a <KEYWORD> in the style of Zdzisław Beksiński, pinterest trending aesthetic", url: "maps/beksinski_map.jpg" },
+  "Mushrooms": { keywords: keywords["adjectives"], prompt_template: "A 3D rendered <KEYWORD> mushroom, pinterest trending aesthetic", url: "maps/mushroom_map.jpg" },
+  "Christmas ornaments": { keywords: keywords["instruments"], prompt_template: "A 3D rendered close-up of a <KEYWORD> shaped christmas ornament, pinterest trending aesthetic", url: "maps/christmas_map.jpg" },
+  "Neon lights": { keywords: keywords["instruments"], prompt_template: "A nighttime close-up of a neon sign in the shape of a <KEYWORD>, pinterest trending aesthetic", url: "maps/neon_map.jpg" },
+  "Flowers": { keywords: keywords["adjectives"], prompt_template: "A 3D rendered <KEYWORD> flower, pinterest trending aesthetic", url: "maps/flowers_map.jpg" }
 }
 function App() {
 
   const [showLabels, setShowLabels] = React.useState(false);
-  const [selectedMap, setSelectedMap] = React.useState("3D render");
+  const [selectedMap, setSelectedMap] = React.useState(Object.keys(mapName2url)[0]);
 
   return (
     <div style={{ width: "100vw", height: "100vh", flex: "column", flexDirection: "column" }}>
@@ -41,15 +86,16 @@ function App() {
         <h1>Audio Latent Space Cartography Demo</h1>
         <p>Click on a point to hear it. Select a latent map style in the dropdown. Legend appears at the bottom of the page when labels are shown.</p>
         <label>
-          Latent map style :
+          Latent map style:
           <select type="select" value={selectedMap} onChange={(e) => setSelectedMap(e.target.value)}>
             {
               Object.keys(mapName2url).map((name) => {
-                return <option  key={ name }value={name}>{name}</option>
+                return <option key={name} value={name}>{name}</option>
               })
             }
           </select>
         </label>
+        <br></br>
         <br></br>
         <button
           onClick={
@@ -59,13 +105,16 @@ function App() {
           }
         >{!showLabels ? "Show audio labels" : "Hide audio labels"}</button>
 
-
-
+      </div>
+      <div style={{ margin: 32 }}>
+        <h3>Map style: {selectedMap}</h3>
+        <p>Prompt template: <it>{mapName2url[selectedMap]["prompt_template"]}</it></p>
+        <p>Keywords: <it>{mapName2url[selectedMap]["keywords"].map(kw => kw + ", ")}</it></p>
       </div>
       <div style={{ flexDirection: "row", display: "flex", justifyContent: "center" }}>
 
         <div style={{ position: "relative", display: "inline-block" }}>
-          <img src={ process.env.PUBLIC_URL+"/"+mapName2url[selectedMap]} style={{ maxHeight: "100vh", maxWidth: "98vw", opacity: showLabels ? 0.1 : 1 }}></img>
+          <img src={process.env.PUBLIC_URL + "/" + mapName2url[selectedMap]["url"]} style={{ maxHeight: "100vh", maxWidth: "98vw", opacity: showLabels ? 0.1 : 1 }}></img>
           {pointData.map((point, pi) => {
             return <div key={pi}
               onClick={() => {
@@ -114,6 +163,15 @@ function App() {
           </div>
         </div>
       </div >
+      {/* <div>
+        {Object.keys(mapName2url).slice(1, 4).map(e =>
+          <img src={process.env.PUBLIC_URL + "/" + mapName2url[e]} style={{ margin: -10, height: 350, width: 350 }}></img>
+        )}
+        <br></br>
+        {Object.keys(mapName2url).slice(4).map(e =>
+          <img src={process.env.PUBLIC_URL + "/" + mapName2url[e]} style={{ margin: -10, height: 350, width: 350 }}></img>
+        )}
+      </div> */}
     </div>
   );
 }
