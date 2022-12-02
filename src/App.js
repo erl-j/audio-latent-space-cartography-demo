@@ -23,13 +23,13 @@ const family2emoji = {
 }
 
 const mapName2url = {
-  "Magritte": "./magritte_map.png",
-  "3D render": "./map.png",
-  "Mushroom mode": "./mushroom_map.png",
-  "Christmas ornaments": "./christmas_map.png",
+  "3D rendered Music Instruments": "maps/map.png",
+  "Magritte Music Instruments": "maps/magritte_map.png",
+  "Mushroom mode": "maps/mushroom_map.png",
+  "Christmas ornaments": "maps/christmas_map.png",
+  "Neon lights":"maps/neon_map.png",
+  "Flowers":"maps/flowers_map.png"
 }
-
-
 function App() {
 
   const [showLabels, setShowLabels] = React.useState(false);
@@ -45,7 +45,7 @@ function App() {
           <select type="select" value={selectedMap} onChange={(e) => setSelectedMap(e.target.value)}>
             {
               Object.keys(mapName2url).map((name) => {
-                return <option value={name}>{name}</option>
+                return <option  key={ name }value={name}>{name}</option>
               })
             }
           </select>
@@ -65,7 +65,7 @@ function App() {
       <div style={{ flexDirection: "row", display: "flex", justifyContent: "center" }}>
 
         <div style={{ position: "relative", display: "inline-block" }}>
-          <img src={mapName2url[selectedMap]} style={{ maxHeight: "100vh", maxWidth: "98vw", opacity: showLabels ? 0.1 : 1 }}></img>
+          <img src={ process.env.PUBLIC_URL+"/"+mapName2url[selectedMap]} style={{ maxHeight: "100vh", maxWidth: "98vw", opacity: showLabels ? 0.1 : 1 }}></img>
           {pointData.map((point, pi) => {
             return <div key={pi}
               onClick={() => {
