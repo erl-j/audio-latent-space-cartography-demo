@@ -30,20 +30,26 @@ function App() {
 
 
   return (
-    <div className="App">
-      <h1>Audio Latent Space Cartography Demo</h1>
-      <p>Click on a point to hear it</p>
-      <button
-
-        onClick={
-          () => {
-            setShowLabels(!showLabels)
+    <div style={{ width: "100vw", height: "100vh", flex: "column", flexDirection: "column" }}>
+      <div style={{ margin: 32 }}>
+        <h1>Audio Latent Space Cartography Demo</h1>
+        <p>Click on a point to hear it</p>
+        <p>Legend appears at the bottom of the page when labels are shown.
+        </p>
+        <button
+          onClick={
+            () => {
+              setShowLabels(!showLabels)
+            }
           }
-        }
-      >{!showLabels ? "Show audio labels" : "Hide audio labels"}</button>
+        >{!showLabels ? "Show audio labels" : "Hide audio labels"}</button>
+        <br></br>
+
+      </div>
       <div style={{ flexDirection: "row", display: "flex", justifyContent: "center" }}>
-        <div style={{ position: "relative", display: "inline-block", height: "99vh" }}>
-          <img src="./map.png" style={{ height: "100%", opacity: showLabels ? 0.1 : 1 }}></img>
+
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <img src="./map.png" style={{ maxHeight: "100vh", maxWidth: "98vw", opacity: showLabels ? 0.1 : 1 }}></img>
           {pointData.map((point, pi) => {
             return <div key={pi}
               onClick={() => {
@@ -56,8 +62,8 @@ function App() {
                 console.log("hello")
               }}
               style={{
-                width: showLabels ? 0 : 20,
-                height: showLabels ? 0 : 20,
+                width: showLabels ? 0 : "2vh",
+                height: showLabels ? 0 : "2vh",
                 borderRadius: 100,
                 backgroundColor: "lightgray",
                 boxShadow: "10px 10px 10px black",
@@ -70,19 +76,27 @@ function App() {
           })}
 
         </div>
-        {showLabels &&
-          <div>
 
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%" }}>
-              <h3>Legend</h3 >
-              {Object.keys(family2emoji).map((family) => {
-                return <div style={{ display: "flex", flexDirection: "row", fontSize: 30 }}>
-                  <div>{family2emoji[family]}   {family}</div>
-                </div>
-              })}
-            </div>
+      </div >
+      <div>
 
-          </div>}
+
+        <div>
+
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", margin: 32 }}>
+
+            {showLabels &&
+              <>
+                <h3>Legend</h3>
+                {Object.keys(family2emoji).map((family) => {
+                  return <div style={{ display: "flex", flexDirection: "row", fontSize: 24 }}>
+                    <div>{family2emoji[family]}   {family}</div>
+                  </div>
+                })}
+              </>
+            }
+          </div>
+        </div>
       </div >
     </div>
   );
