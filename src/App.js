@@ -69,7 +69,7 @@ const keywords = {
 const mapName2url = {
   "Music instruments": { keywords: keywords["instruments"], prompt_template: "A 3D rendered close-up of a <KEYWORD>, pinterest trending aesthetic", url: "maps/map.jpg" },
   "René Magritte": { keywords: keywords["instruments"], prompt_template: "A close-up of a <KEYWORD> in the style of Renee Magritte, pinterest trending aesthetic", url: "maps/magritte_map.jpg" },
-  "Besinski": { keywords: keywords["instruments"], prompt_template: "A close-up of a <KEYWORD> in the style of Zdzisław Beksiński, pinterest trending aesthetic", url: "maps/beksinski_map.jpg" },
+  "Beksiński": { keywords: keywords["instruments"], prompt_template: "A close-up of a <KEYWORD> in the style of Zdzisław Beksiński, pinterest trending aesthetic", url: "maps/beksinski_map.jpg" },
   "Mushrooms": { keywords: keywords["adjectives"], prompt_template: "A 3D rendered <KEYWORD> mushroom, pinterest trending aesthetic", url: "maps/mushroom_map.jpg" },
   "Christmas ornaments": { keywords: keywords["instruments"], prompt_template: "A 3D rendered close-up of a <KEYWORD> shaped christmas ornament, pinterest trending aesthetic", url: "maps/christmas_map.jpg" },
   "Neon lights": { keywords: keywords["instruments"], prompt_template: "A nighttime close-up of a neon sign in the shape of a <KEYWORD>, pinterest trending aesthetic", url: "maps/neon_map.jpg" },
